@@ -7,9 +7,13 @@
     "@types/node": "^8.0.9",
     "@types/react": "^15.0.35",
     "@types/react-dom": "^15.5.1",
+    "@types/react-redux": "^4.4.45",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts-ts": "2.3.2"
+    "react-redux": "^5.0.5",
+    "react-scripts-ts": "2.3.2",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {
