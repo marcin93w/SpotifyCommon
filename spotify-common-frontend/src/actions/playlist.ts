@@ -1,15 +1,8 @@
 import Playlist from '../types/DTO/Playlist';
+import { ActionCreator } from 'react-redux-typescript';
 
-export const PLAYLIST_FETCH_SUCCESS = 'PLAYLIST_FETCH_SUCCESS';
-
-export interface PlaylistFetchSuccess {
-  type: typeof PLAYLIST_FETCH_SUCCESS;
-  playlist: Playlist;
-}
+const PLAYLIST_FETCH_SUCCESS = 'PLAYLIST_FETCH_SUCCESS';
 
 export const ActionCreators = {
-  PlaylistFetchSuccess: (playlist: Playlist) => <PlaylistFetchSuccess> ({
-    type: PLAYLIST_FETCH_SUCCESS,
-    playlist: playlist
-  })
+  PlaylistFetchSuccess: new ActionCreator<typeof PLAYLIST_FETCH_SUCCESS, {playlist: playlist}>(PLAYLIST_FETCH_SUCCESS)
 };
