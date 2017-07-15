@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux';
 import ActionCreators from '../actions';
 import Action from '../types/Action';
+import { Playlist } from '../types/State';
 
-function playlist(state = [], action: Action) {
+const initialState = {
+  songs: []
+};
+
+function playlist(state: Playlist = initialState, action: Action) {
   switch (action.type) {
     case ActionCreators.PlaylistFetchSuccess.type:
       return {

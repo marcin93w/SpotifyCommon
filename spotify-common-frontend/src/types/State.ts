@@ -5,8 +5,10 @@ type Song = Readonly<{
   album: String;
 }>;
 
+export type Playlist = Readonly<{
+  songs: Song[]
+}>;
+
 export type State = Readonly<{
-  playlist: {
-    songs: Song[]
-  }
+  playlist: Playlist
 }>;
