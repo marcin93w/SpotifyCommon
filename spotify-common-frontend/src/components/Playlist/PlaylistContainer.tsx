@@ -3,7 +3,7 @@ import PlaylistComponent from './Playlist';
 import { State } from '../../types/State';
 import { Dispatch } from 'react-redux';
 
-import { ActionCreators } from '../../actions/playlist';
+import ActionCreators from '../../actions';
 
 const mapStateToProps = ({playlist}: State) => {
   return { 
@@ -12,7 +12,7 @@ const mapStateToProps = ({playlist}: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
-  dispatch(ActionCreators.PlaylistFetchSuccess({
+  dispatch(ActionCreators.PlaylistFetchSuccess.create({playlist: {
     songs: [{
       id: 1,
       name: 'ads',
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch: Dispatch<State>) => {
       author: 'cvx',
       album: 'nty'
     }]
-  }));
+  }}));
   return {};
 };
 

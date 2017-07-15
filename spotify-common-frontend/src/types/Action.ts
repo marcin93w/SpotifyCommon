@@ -1,4 +1,4 @@
-import { actionCreators } from '../actions';
+import actionCreators from '../actions';
 
 type Action = typeof actionCreators[keyof typeof actionCreators];
 

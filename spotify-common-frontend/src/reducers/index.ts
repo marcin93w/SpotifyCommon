@@ -6,7 +6,7 @@ function playlist(state = [], action: Action) {
   switch (action.type) {
     case ActionCreators.PlaylistFetchSuccess.type:
       return {
-        ...state, songs: action.playlist.songs
+        ...state, songs: action.payload.playlist.songs
       };
     default: return state;
   }
