@@ -1,8 +1,10 @@
-﻿namespace SpotifyBackend.Entities
+﻿using System.Collections.Generic;
+
+namespace SpotifyBackend.Entities
 {
     public class Track : IEntity
     {
         public string Id { get; set; }
-        public double Rating { get; set; }
+        public List<Rate> Rates { get; set; }
     }
 }

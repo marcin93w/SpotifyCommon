@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Net.Http;
+using AutoMapper;
+using SpotifyBackend.Entities;
 using SpotifyBackend.Helpers;
+using SpotifyBackend.Models;
 
 namespace SpotifyBackend.Services
 {
@@ -37,6 +40,11 @@ namespace SpotifyBackend.Services
             }
 
             return jsonResponse;
+        }
+
+        private Track GetTrackById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SpotifyBackend.Entities;
+using SpotifyBackend.Models;
 using SpotifyBackend.Services;
 
 namespace SpotifyBackend
@@ -57,6 +61,14 @@ namespace SpotifyBackend
                     context.Response.StatusCode = 500;
                     await context.Response.WriteAsync("Unexpected server error. Please, try again later.");
                 });
+            });
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Track, TrackForReturnDto>()
+                    .ForMember(dest => dest.Rate,
+                        opt => opt.MapFrom(src =>
+                            src.Rates.Average(item => item.Value)));
             });
 
             app.UseMvc();
