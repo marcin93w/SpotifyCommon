@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using AutoMapper;
+using MongoDB.Driver;
 using SpotifyBackend.Entities;
 using SpotifyBackend.Helpers;
 using SpotifyBackend.Models;
@@ -9,6 +10,27 @@ namespace SpotifyBackend.Services
 {
     public class PlaylistRepository : IPlaylistRepository
     {
+        public static string ConnectionString { get; set; }
+        public static string DatabaseName { get; set; }
+        public static bool IsSSL { get; set; }
+
+        private IMongoDatabase _database;
+
+        public PlaylistRepository()
+        {
+            try
+            {
+                var settings = MongoClientSettings.FromUrl(new MongoUrl(ConnectionString));
+
+                var mongoClient = new MongoClient(settings);
+                _database = mongoClient.GetDatabase(DatabaseName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Can not access to db server.", ex);
+            }
+        }
+
         public string GetAllTracks(string token, string userId, string playlistId)
         {
             var jsonResponse = GetTracksJson(token, userId, playlistId);
