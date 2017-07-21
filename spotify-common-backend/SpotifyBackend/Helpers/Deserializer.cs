@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using SpotifyBackend.Entities;
 using SpotifyBackend.Models.SpotifyModels.Generated;
-using Track = SpotifyBackend.Entities.Track;
 
 namespace SpotifyBackend.Helpers
 {
     public static class Deserializer
     {
-        public static Track DeserializeTrack(string jsonResponse)
+        public static IEnumerable<TrackEntity> DeserializeTracks(string jsonResponse)
         {
-            var serializer = new Newtonsoft.Json.JsonSerializer();
+            var deserializedObject = JsonConvert.DeserializeObject<TracksResponse>(jsonResponse);
 
-            var obj = JsonConvert.DeserializeObject<TracksResponse>(jsonResponse);
+            return CustomMappers.ExtractTracksFromResponse(deserializedObject);
 
-            throw new NotImplementedException();
         }
     }
 }

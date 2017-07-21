@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SpotifyBackend.Entities;
 using SpotifyBackend.Models;
+using SpotifyBackend.Models.SpotifyModels.Generated;
 using SpotifyBackend.Services;
 
 namespace SpotifyBackend
@@ -65,7 +66,7 @@ namespace SpotifyBackend
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Track, TrackForReturnDto>()
+                cfg.CreateMap<TrackEntity, TrackForReturnDto>()
                     .ForMember(dest => dest.Rate,
                         opt => opt.MapFrom(src =>
                             src.Rates.Average(item => item.Value)));

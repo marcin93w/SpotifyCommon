@@ -15,6 +15,8 @@ namespace SpotifyBackend.Controllers
             _playlistRepository = playlistRepository;
         }
 
+
+
         [HttpGet]
         public IActionResult Get([FromHeader(Name = "Authorization")] string token, string userId, string playlistId)
         {
@@ -27,6 +29,8 @@ namespace SpotifyBackend.Controllers
         [Route("{id}")]
         public IActionResult Rate(int id, int rating)
         {
+
+
             return Ok("Not implemented");
         }
     }

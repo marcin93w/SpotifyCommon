@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using AutoMapper;
 using MongoDB.Driver;
@@ -16,14 +17,16 @@ namespace SpotifyBackend.Services
 
         private IMongoDatabase _database;
 
+
+
         public PlaylistRepository()
         {
             try
             {
-                var settings = MongoClientSettings.FromUrl(new MongoUrl(ConnectionString));
+                var settings = MongoClientSettings.FromUrl(new MongoUrl(@"mongodb://localhost:27017"));
 
                 var mongoClient = new MongoClient(settings);
-                _database = mongoClient.GetDatabase(DatabaseName);
+                _database = mongoClient.GetDatabase(@"spotify-common");
             }
             catch (Exception ex)
             {
@@ -31,17 +34,30 @@ namespace SpotifyBackend.Services
             }
         }
 
-        public string GetAllTracks(string token, string userId, string playlistId)
+        public bool FeedDatabaseFromPlaylist(string token, string userId, string playlistId)
         {
-            var jsonResponse = GetTracksJson(token, userId, playlistId);
+            var jsonFromSpotify = GetTracksJson(token, userId, playlistId);
 
-            var deserializedResponse = Deserializer.DeserializeTrack(jsonResponse);
+            var tracksToInsert = Deserializer.DeserializeTracks(jsonFromSpotify);
+
+            //TODO: Insert to DB
 
             throw new NotImplementedException();
         }
 
-        public bool RateTrack(int id, int rate)
+        public List<TrackForReturnDto> GetAllTracks(string token, string userId, string playlistId)
         {
+            var tracksFromDb = new List<TrackEntity>();
+
+            var tracksToReturn = Mapper.Map<List<TrackForReturnDto>>(tracksFromDb);
+
+            return tracksToReturn;
+        }
+
+        public bool RateTrack(string id, int rate)
+        {
+
+
             throw new NotImplementedException();
         }
 
@@ -62,11 +78,6 @@ namespace SpotifyBackend.Services
             }
 
             return jsonResponse;
-        }
-
-        private Track GetTrackById(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }
