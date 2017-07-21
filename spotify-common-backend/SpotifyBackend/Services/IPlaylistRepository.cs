@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SpotifyBackend.Entities;
 using SpotifyBackend.Models;
 
 namespace SpotifyBackend.Services

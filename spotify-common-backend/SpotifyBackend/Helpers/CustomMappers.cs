@@ -16,7 +16,7 @@ namespace SpotifyBackend.Helpers
             var trackList = responseItems.Select(trackItem => trackItem.Track.Id)
                 .Select(id => new TrackEntity
                 {
-                    Id = id,
+                    SpotifyId = id,
                     Rates = new List<Rate>()
                 })
                 .ToList();

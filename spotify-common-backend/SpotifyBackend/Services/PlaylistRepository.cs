@@ -47,7 +47,7 @@ namespace SpotifyBackend.Services
 
         public List<TrackForReturnDto> GetAllTracks(string token, string userId, string playlistId)
         {
-            var tracksFromDb = new List<TrackEntity>();
+            var tracksFromDb = _database.GetCollection<TrackEntity>("Tracks").Find(t => true).ToList();
 
             var tracksToReturn = Mapper.Map<List<TrackForReturnDto>>(tracksFromDb);
 

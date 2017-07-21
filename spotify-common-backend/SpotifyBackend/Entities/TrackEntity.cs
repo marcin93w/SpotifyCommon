@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace SpotifyBackend.Entities
 {
     public class TrackEntity : IEntity
     {
-        public string Id { get; set; }
+        public ObjectId _id {get;set;}
+        public string SpotifyId { get; set; }
         public List<Rate> Rates { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace SpotifyBackend.Models
 {
     public class TrackForReturnDto
     {
-        public string Id { get; set; }
+        public string SpotifyId { get; set; }
         public double Rate { get; set; }
     }
 }
