@@ -16,14 +16,14 @@ namespace SpotifyBackend.Services
         public static bool IsSSL { get; set; }
 
         private IMongoDatabase _database;
-
+        
 
 
         public PlaylistRepository()
         {
             try
             {
-                var settings = MongoClientSettings.FromUrl(new MongoUrl(@"mongodb://localhost:27017"));
+                var settings = MongoClientSettings.FromUrl(new MongoUrl(@"mongodb://165.227.141.58:27017"));
 
                 var mongoClient = new MongoClient(settings);
                 _database = mongoClient.GetDatabase(@"spotify-common");
@@ -40,25 +40,47 @@ namespace SpotifyBackend.Services
 
             var tracksToInsert = Deserializer.DeserializeTracks(jsonFromSpotify);
 
-            //TODO: Insert to DB
-
-            throw new NotImplementedException();
+            try{
+                GetTracks().InsertMany(tracksToInsert);
+                
+                return true;
+            }
+            catch{
+                return false;
+            }
         }
 
-        public List<TrackForReturnDto> GetAllTracks(string token, string userId, string playlistId)
+        public List<TrackForReturnDto> GetAllTracks()
         {
-            var tracksFromDb = _database.GetCollection<TrackEntity>("Tracks").Find(t => true).ToList();
+            var collection = GetTracks().Find(trc => true);
+            var tracksFromDb = collection.ToList();
 
             var tracksToReturn = Mapper.Map<List<TrackForReturnDto>>(tracksFromDb);
 
             return tracksToReturn;
         }
 
-        public bool RateTrack(string id, int rate)
+        public bool RateTrack(string id, int rate, int userId)
         {
+            var trackFromDb = GetTracks().Find(t => t.SpotifyId == id).FirstOrDefault();
 
+            trackFromDb.Rates.Add(
+                new Rate{
+                    UserId = userId,
+                    Value = rate
+                }
+            );
 
-            throw new NotImplementedException();
+            var replacementResult = _database.GetCollection<TrackEntity>("Tracks").ReplaceOne(t => t._id == trackFromDb._id, trackFromDb);
+
+            return replacementResult.IsAcknowledged;
+        }
+
+        public bool TrackExist(string id)
+        {
+            var queryResult = GetTracks().Find(t => t.SpotifyId == id);
+
+            return queryResult.Any();
         }
 
         private static string GetTracksJson(string token, string userId, string playlistId)
@@ -78,6 +100,11 @@ namespace SpotifyBackend.Services
             }
 
             return jsonResponse;
+        }
+
+        private IMongoCollection<TrackEntity> GetTracks()
+        {
+            return _database.GetCollection<TrackEntity>("Tracks");
         }
     }
 }

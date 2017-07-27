@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SpotifyBackend.Services;
 
@@ -20,18 +22,29 @@ namespace SpotifyBackend.Controllers
         [HttpGet]
         public IActionResult Get([FromHeader(Name = "Authorization")] string token, string userId, string playlistId)
         {
-            var response = _playlistRepository.GetAllTracks(token, userId, playlistId);
+            var response = _playlistRepository.GetAllTracks();
 
             return Ok(response);
         }
 
         [HttpPost]
-        [Route("{id}")]
-        public IActionResult Rate(int id, int rating)
+        [Route("{spotifyId}")]
+        public IActionResult Rate(string spotifyId, int rating, int userId)
         {
+            if (string.IsNullOrWhiteSpace(spotifyId))
+                return BadRequest();
 
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-            return Ok("Not implemented");
+            if (!_playlistRepository.TrackExist(spotifyId))
+                return NotFound();
+
+            var rateResult = _playlistRepository.RateTrack(spotifyId, rating, userId);
+
+            return rateResult ? 
+                NoContent() : 
+                StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }

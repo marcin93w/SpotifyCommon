@@ -25,7 +25,7 @@ namespace SpotifyBackend.Controllers
         [HttpGet]
         public IActionResult Test()
         {
-            var result = _playlistRepository.GetAllTracks("sdfa", "dsaf", "dfa");
+            var result = _playlistRepository.GetAllTracks();
 
             return Ok(result);
         }

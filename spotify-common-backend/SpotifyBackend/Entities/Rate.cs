@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace SpotifyBackend.Entities
 {
     public class Rate : IEntity
     {
-        public string UserId { get; set; }
+        [BsonElement("UserId")]
+        public int UserId { get; set; }
+
+        [BsonElement("Value")]
         public int Value { get; set; }
     }
 }
