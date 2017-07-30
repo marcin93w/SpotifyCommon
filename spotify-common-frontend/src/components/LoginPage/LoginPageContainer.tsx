@@ -11,9 +11,10 @@ const mapState2Props = (state: State) => {
 };
 
 const mapDispatch2Props = (dispatch: Dispatch<State>) => ({
-  onSpotifyAuthStarted: () => { dispatch(ActionCreators.StartSpotifyAuth.create({})); },
-  onSpotifyAuthSuccess: (accessCode: string) => {
-    dispatch(ActionCreators.SpotifyAuthSuccess.create({ accessCode: accessCode }));
+  startAuthentication: (accessToken: string) => { 
+    dispatch(ActionCreators.StartSpotifyAuth.create({ accessToken })); },
+  onSpotifyAuthSuccess: (apiToken: string) => {
+    dispatch(ActionCreators.SpotifyAuthSuccess.create({ apiToken }));
   }
 });
 

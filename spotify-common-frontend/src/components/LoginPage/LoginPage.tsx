@@ -2,13 +2,34 @@ import * as React from 'react';
 import config from '../../config';
 
 interface LoginPageProps {
-  onSpotifyAuthStarted: () => void;
+  startAuthentication: (accessToken: string) => void;
   isSpotifyAuthStarted: boolean;
-  onSpotifyAuthSuccess: (accessCode: string) => void;
+  onSpotifyAuthSuccess: (apiToken: string) => void;
 }
 
 class LoginPage extends React.Component<LoginPageProps, {}> {
-  getLoginURL(scopes: string[]): string {
+  componentDidMount() {
+    const token = this.tryGetAccessToken();
+    if (token) {
+      this.props.startAuthentication(token);
+    }
+  }
+
+  render() {
+    const onLoginButtonClick = () => {
+      this.redirectToSpotifyLoginWindow(this.props.onSpotifyAuthSuccess);
+    };
+
+    return (
+      <div className="LoginPanel">
+        <button className="btn" onClick={onLoginButtonClick} disabled={this.props.isSpotifyAuthStarted} >
+          Login with Spotify
+        </button>
+      </div>
+    );
+  }
+
+  private getLoginURL(scopes: string[]): string {
     return config.spotifyLoginUrl + 
       '?client_id=' + config.spotifyClientId +
       '&redirect_uri=' + encodeURIComponent(config.spotifyRedirectUri) +
@@ -16,42 +37,21 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
       '&response_type=token';
   }
   
-  displaySpotifyLoginWindow(onSuccess: (accessCode: string) => void) {
+  private redirectToSpotifyLoginWindow(onSuccess: (accessCode: string) => void) {
     const url = this.getLoginURL(['user-read-email']);
-    
-    var width = 450,
-      height = 730,
-      left = (screen.width / 2) - (width / 2),
-      top = (screen.height / 2) - (height / 2);
-    
-    window.addEventListener(
-      'message', 
-      event => {
-        var hash = JSON.parse(event.data);
-        if (hash.type === 'access_token') {
-          onSuccess(hash.access_token);
-        }
-      }, 
-      false);
-
-    const windowParams = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,' + 
-                  `width=${width}, height=${height}, top=${top}, left=${left}`;
-    window.open(url, 'Spotify', windowParams);
+    window.location.href = url;
   }
-  
-  render() {
-    const onLoginButtonClick = () => {
-      this.props.onSpotifyAuthStarted();
-      this.displaySpotifyLoginWindow(this.props.onSpotifyAuthSuccess);
-    };
 
-    return (
-      <div className="LoginPanel">
-        <button className="btn" onClick={onLoginButtonClick}>
-          Login with Spotify
-        </button>
-      </div>
-    );
+  private tryGetAccessToken(): string {
+    let hash: {access_token: string} = {access_token: ''};
+    window.location.hash.replace(/^#\/?/, '').split('&').forEach(function(kv: string) {
+      var spl = kv.indexOf('=');
+      if (spl !== -1) {
+        hash[kv.substring(0, spl)] = decodeURIComponent(kv.substring(spl + 1));
+      }
+    });
+
+    return hash.access_token;
   }
 }
 

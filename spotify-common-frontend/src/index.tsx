@@ -7,8 +7,12 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
+import { compose } from 'redux';
 
-const store = createStore(reducers, {}, applyMiddleware(thunkMiddleware));
+// tslint:disable-next-line:no-string-literal
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+const middleware = composeEnhancers(applyMiddleware(thunkMiddleware));
+const store = createStore(reducers, {}, middleware);
 
 ReactDOM.render(
   <Provider store={store}>
