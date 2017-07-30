@@ -1,13 +1,20 @@
 import * as React from 'react';
 import Song from '../Song/SongContainer';
+import { Redirect } from 'react-router-dom';
 
 interface PlaylistProperties {
   songIds: number[];
+  isAuthenticated: boolean;
 }
 
 class Playlist extends React.Component<PlaylistProperties, {}> {
   render() {
-    const {songIds} = this.props;
+    const {isAuthenticated, songIds} = this.props;
+
+    if (!isAuthenticated) {
+      return (<Redirect to="/login" />);
+    }
+
     return (
       <div className="Playlist">
         {songIds.map(songId => 

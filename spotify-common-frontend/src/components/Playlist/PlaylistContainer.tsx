@@ -5,8 +5,9 @@ import { Dispatch } from 'react-redux';
 
 import ActionCreators from '../../actions';
 
-const mapStateToProps = ({playlist}: State) => {
+const mapStateToProps = ({user, playlist}: State) => {
   return { 
+    isAuthenticated: !!user.apiToken,
     songIds: playlist.songs !== undefined ? playlist.songs.map(song => song.id) : []
   };
 };

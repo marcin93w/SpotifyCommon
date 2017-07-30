@@ -4,7 +4,6 @@ import config from '../../config';
 interface LoginPageProps {
   startAuthentication: (accessToken: string) => void;
   isSpotifyAuthStarted: boolean;
-  onSpotifyAuthSuccess: (apiToken: string) => void;
 }
 
 class LoginPage extends React.Component<LoginPageProps, {}> {
@@ -17,12 +16,12 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
 
   render() {
     const onLoginButtonClick = () => {
-      this.redirectToSpotifyLoginWindow(this.props.onSpotifyAuthSuccess);
+      this.redirectToSpotifyLoginWindow();
     };
 
     return (
       <div className="LoginPanel">
-        <button className="btn" onClick={onLoginButtonClick} disabled={this.props.isSpotifyAuthStarted} >
+        <button className="btn" onClick={onLoginButtonClick} disabled={this.props.isSpotifyAuthStarted}>
           Login with Spotify
         </button>
       </div>
@@ -37,7 +36,7 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
       '&response_type=token';
   }
   
-  private redirectToSpotifyLoginWindow(onSuccess: (accessCode: string) => void) {
+  private redirectToSpotifyLoginWindow() {
     const url = this.getLoginURL(['user-read-email']);
     window.location.href = url;
   }

@@ -14,7 +14,7 @@ const initialUserState = {
 
 function user(state: User = initialUserState, action: Action) {
   switch (action.type) {
-    case ActionCreators.StartSpotifyAuth.type:
+    case ActionCreators.SpotifyAuthStarted.type:
       return {
         ...state, isSpotifyAuthStarted: true
       };
