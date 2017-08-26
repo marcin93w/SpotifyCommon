@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using SpotifyBackend.Entities;
 using SpotifyBackend.Models.SpotifyModels.Generated;
 

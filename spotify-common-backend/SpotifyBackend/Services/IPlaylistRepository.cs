@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SpotifyBackend.Entities;
+﻿using System.Collections.Generic;
 using SpotifyBackend.Models;
 
 namespace SpotifyBackend.Services

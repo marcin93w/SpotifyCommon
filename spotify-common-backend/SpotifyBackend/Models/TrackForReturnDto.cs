@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SpotifyBackend.Models
+﻿namespace SpotifyBackend.Models
 {
     public class TrackForReturnDto
     {
