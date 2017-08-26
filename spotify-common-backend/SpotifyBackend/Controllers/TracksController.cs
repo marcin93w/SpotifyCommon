@@ -20,7 +20,7 @@ namespace SpotifyBackend.Controllers
 
 
         [HttpGet]
-        public IActionResult Get([FromHeader(Name = "Authorization")] string token, string userId, string playlistId)
+        public IActionResult Get()
         {
             var response = _playlistRepository.GetAllTracks();
 

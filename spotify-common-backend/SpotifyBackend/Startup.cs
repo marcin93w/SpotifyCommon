@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,8 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SpotifyBackend.Entities;
+using SpotifyBackend.Helpers.Extensions;
 using SpotifyBackend.Models;
-using SpotifyBackend.Models.SpotifyModels.Generated;
 using SpotifyBackend.Services;
 
 namespace SpotifyBackend
@@ -69,7 +67,8 @@ namespace SpotifyBackend
                 cfg.CreateMap<TrackEntity, TrackForReturnDto>()
                     .ForMember(dest => dest.Rate,
                         opt => opt.MapFrom(src =>
-                            src.Rates.Average(item => item.Value)));
+                            src.Rates.AverageOrZero()
+                            ));
             });
 
             app.UseMvc();
