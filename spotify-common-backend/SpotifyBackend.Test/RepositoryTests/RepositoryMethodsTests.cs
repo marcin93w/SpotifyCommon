@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Xunit;
-using Newtonsoft.Json;
-using SpotifyBackend;
-using SpotifyBackend.Entities;
 using SpotifyBackend.Services;
+using Xunit;
 
-namespace SpotifyBackend.Test
+namespace SpotifyBackend.Test.RepositoryTests
 {
     public class RepositoryMethodsTests
     {
