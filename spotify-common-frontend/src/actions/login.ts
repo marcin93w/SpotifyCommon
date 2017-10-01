@@ -28,10 +28,18 @@ export function startSpotifyAuth(spotifyAuthCode: string) {
       })
     .then(res => res.json())
     .then(data => {
-      dispatch(ActionCreators.SpotifyAuthSuccess.create({apiToken: data.userId}));
+      if(data.userId) {
+        dispatch(ActionCreators.SpotifyAuthSuccess.create({apiToken: data.userId}));
+      } else {
+        dispatch(ActionCreators.SpotifyAuthError.create({
+          errorMessage: "Authorization error"
+        }));
+      }
     })
     .catch((error: Error) => {
-      dispatch(ActionCreators.SpotifyAuthError.create({errorMessage: error.message}));
+      dispatch(ActionCreators.SpotifyAuthError.create({
+        errorMessage: error.message ? error.message : "Authorization error"
+      }));
     });
   };
 }
