@@ -4,6 +4,8 @@ import config from '../../config';
 interface LoginPageProps {
   startAuthentication: (spotifyAuthCode: string) => void;
   isSpotifyAuthStarted: boolean;
+  errorMessage: string;
+  isError: boolean;
 }
 
 class LoginPage extends React.Component<LoginPageProps, {}> {
@@ -19,9 +21,14 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
       this.redirectToSpotifyLoginWindow();
     };
 
+    const {isError, errorMessage, isSpotifyAuthStarted} = this.props;
+
     return (
       <div className="LoginPanel">
-        <button className="btn" onClick={onLoginButtonClick} disabled={this.props.isSpotifyAuthStarted}>
+        {isError &&
+            <div className="error-message">{errorMessage}</div>
+        }
+        <button className="btn" onClick={onLoginButtonClick} disabled={isSpotifyAuthStarted}>
           Login with Spotify
         </button>
       </div>

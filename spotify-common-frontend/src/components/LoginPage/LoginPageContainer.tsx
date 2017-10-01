@@ -5,8 +5,11 @@ import { Dispatch } from 'redux';
 import { startSpotifyAuth } from '../../actions/login';
 
 const mapState2Props = (state: State) => {
+  const errorMsg = state.user ? state.user.loginErrorMessage : '';
   return {
-    isSpotifyAuthStarted: state.user ? state.user.isSpotifyAuthStarted : false
+    isSpotifyAuthStarted: state.user ? state.user.isSpotifyAuthStarted : false,
+    isError: !!errorMsg,
+    errorMessage: errorMsg
   };
 };
 
