@@ -1,11 +1,13 @@
 import * as React from 'react';
 import config from '../../config';
+import { Redirect } from 'react-router-dom';
 
 interface LoginPageProps {
   startAuthentication: (spotifyAuthCode: string) => void;
   isSpotifyAuthStarted: boolean;
   errorMessage: string;
   isError: boolean;
+  isSpotifyAuthFinished: boolean;
 }
 
 class LoginPage extends React.Component<LoginPageProps, {}> {
@@ -21,7 +23,11 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
       this.redirectToSpotifyLoginWindow();
     };
 
-    const {isError, errorMessage, isSpotifyAuthStarted} = this.props;
+    const {isError, errorMessage, isSpotifyAuthStarted, isSpotifyAuthFinished} = this.props;
+
+    if (isSpotifyAuthFinished) {
+      return (<Redirect to="/" />);
+    }
 
     return (
       <div className="LoginPanel">

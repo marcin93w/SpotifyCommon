@@ -9,7 +9,8 @@ const mapState2Props = (state: State) => {
   return {
     isSpotifyAuthStarted: state.user ? state.user.isSpotifyAuthStarted : false,
     isError: !!errorMsg,
-    errorMessage: errorMsg
+    errorMessage: errorMsg,
+    isSpotifyAuthFinished: !!(state.user ? state.user.apiToken : '')
   };
 };
 
