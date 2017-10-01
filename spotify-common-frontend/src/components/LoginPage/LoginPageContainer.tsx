@@ -11,7 +11,7 @@ const mapState2Props = (state: State) => {
 };
 
 const mapDispatch2Props = (dispatch: Dispatch<State>) => ({
-  startAuthentication: (accesToken: string) => dispatch(startSpotifyAuth(accesToken))
+  startAuthentication: (spotifyAuthCode: string) => dispatch(startSpotifyAuth(spotifyAuthCode))
 });
 
 export default connect(mapState2Props, mapDispatch2Props)(LoginPage);

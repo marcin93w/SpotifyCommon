@@ -13,7 +13,7 @@ export const ActionCreators = {
   SpotifyAuthError: new ActionCreator<typeof SPOTIFY_AUTH_ERROR, { errorMessage: String }>(SPOTIFY_AUTH_ERROR)
 };
 
-export function startSpotifyAuth(accessToken: string) {
+export function startSpotifyAuth(spotifyAuthCode: string) {
   return (dispatch: Dispatch<State>, getState: () => State) => {
     dispatch(ActionCreators.SpotifyAuthStarted.create({}));
   };

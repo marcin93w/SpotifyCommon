@@ -17,7 +17,7 @@ class App extends React.Component<{}, {}> {
         </div>
         <Switch>
           <Route path="/login" component={LoginPage} />
-          <Route path="/:access_token" component={LoginPage} />
+          <Route path="/:code" component={LoginPage} />
           <Route path="/" component={Playlist} />
         </Switch>
       </div>

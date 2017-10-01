@@ -2,7 +2,7 @@ import * as React from 'react';
 import config from '../../config';
 
 interface LoginPageProps {
-  startAuthentication: (accessToken: string) => void;
+  startAuthentication: (spotifyAuthCode: string) => void;
   isSpotifyAuthStarted: boolean;
 }
 
@@ -37,20 +37,21 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
   }
   
   private redirectToSpotifyLoginWindow() {
-    const url = this.getLoginURL(['user-read-email']);
+    const url = this.getLoginURL(['user-read-email', 'playlist-read-collaborative', 'playlist-read-private']);
     window.location.href = url;
   }
 
   private tryGetAccessToken(): string {
-    let hash: {access_token: string} = {access_token: ''};
-    window.location.hash.replace(/^#\/?/, '').split('&').forEach(function(kv: string) {
+    let hash: {code: string} = {code: ''};
+
+    window.location.search.replace('?', '').split('&').forEach(function(kv: string) {
       var spl = kv.indexOf('=');
       if (spl !== -1) {
         hash[kv.substring(0, spl)] = decodeURIComponent(kv.substring(spl + 1));
       }
     });
 
-    return hash.access_token;
+    return hash.code;
   }
 }
 
