@@ -33,7 +33,7 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
       '?client_id=' + config.spotifyClientId +
       '&redirect_uri=' + encodeURIComponent(config.spotifyRedirectUri) +
       '&scope=' + encodeURIComponent(scopes.join(' ')) +
-      '&response_type=token';
+      '&response_type=code';
   }
   
   private redirectToSpotifyLoginWindow() {
