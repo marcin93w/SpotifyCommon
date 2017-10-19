@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import ActionCreators from '../actions';
 import Action from '../types/Action';
-import { Playlist, User, State, SearchData } from '../types/State';
+import { Playlist, User, State, SearchData, SongAddData } from '../types/State';
 
 const initialPlaylistState = {
   songs: []
@@ -20,6 +20,12 @@ const initialSearchState = {
   error: "",
   results: []
 };
+
+const initialSongAddState = {
+  isRunning: false,
+  error: "",
+  position: 0
+}
 
 function user(state: User = initialUserState, action: Action) {
   switch (action.type) {
@@ -54,7 +60,7 @@ function search(state: SearchData = initialSearchState, action: Action) {
   switch (action.type) {
     case ActionCreators.SearchFetchSuccess.type:
       return {
-        ...state, isRunning: false, results: action.payload.results
+        ...state, isRunning: false, results: action.payload.results.map((song, id) => ({...song, id, spotifyId: song.id}))
       };
     case ActionCreators.SearchFetchStarted.type:
       return {
@@ -68,5 +74,23 @@ function search(state: SearchData = initialSearchState, action: Action) {
   }
 }
 
-const reducer = combineReducers<State>({ playlist, user, search });
+function songAdd(state: SongAddData = initialSongAddState, action: Action) {
+  switch (action.type) {
+    case ActionCreators.AddFetchSuccess.type:
+      return {
+        ...state, isRunning: false, position: action.payload.position
+      };
+    case ActionCreators.AddFetchStarted.type:
+      return {
+        ...state, isRunning: true
+      };
+    case ActionCreators.AddFetchError.type:
+      return {
+        ...state, isRunning: false, error: action.payload.errorMessage
+      };
+    default: return state;
+  }
+}
+
+const reducer = combineReducers<State>({ playlist, user, search, songAdd });
 export default reducer;

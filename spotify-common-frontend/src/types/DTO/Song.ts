@@ -1,5 +1,5 @@
 type Song = Readonly<{
-  id: number;
+  id: string;
   name:  String;
   artist: String;
   album: String;

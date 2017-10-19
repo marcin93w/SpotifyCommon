@@ -5,6 +5,7 @@ type SongProperties = Readonly<{
   name: String;
   artist: String;
   album: String;
+  spotifyId: string;
 }>;
 
 class Song extends React.Component<SongProperties, {}> {

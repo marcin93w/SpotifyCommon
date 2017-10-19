@@ -3,6 +3,7 @@ export type Song = Readonly<{
   name: String;
   artist: String;
   album: String;
+  spotifyId: string;
 }>;
 
 export type Playlist = Readonly<{
@@ -23,8 +24,15 @@ export type SearchData = Readonly<{
   results: Song[]
 }>;
 
+export type SongAddData = Readonly<{
+  isRunning: boolean,
+  error: string,
+  position: number
+}>;
+
 export type State = Readonly<{
   user: User,
   playlist: Playlist,
-  search: SearchData
+  search: SearchData,
+  songAddData: SongAddData
 }>;

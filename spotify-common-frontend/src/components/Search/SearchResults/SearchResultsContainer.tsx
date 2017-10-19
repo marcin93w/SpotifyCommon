@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import SearchResultsComponent from './SearchResults';
 import { State } from '../../../types/State';
 import { Dispatch } from 'react-redux';
+import { addSong } from '../../../actions/add';
 
 const mapStateToProps = ({search}: State) => {
   return { 
@@ -10,7 +11,7 @@ const mapStateToProps = ({search}: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
-  return { };
+  return { addSong: (songId: string) => dispatch(addSong(songId)) };
 };
 
 const SearchResults = connect(
