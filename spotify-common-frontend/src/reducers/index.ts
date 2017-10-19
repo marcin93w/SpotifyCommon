@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import ActionCreators from '../actions';
 import Action from '../types/Action';
-import { Playlist, User } from '../types/State';
+import { Playlist, User, State } from '../types/State';
 
 const initialPlaylistState = {
   songs: []
@@ -43,5 +43,5 @@ function playlist(state: Playlist = initialPlaylistState, action: Action) {
   }
 }
 
-const reducer = combineReducers({ playlist, user });
+const reducer = combineReducers<State>({ playlist, user });
 export default reducer;
