@@ -37,7 +37,7 @@ function playlist(state: Playlist = initialPlaylistState, action: Action) {
   switch (action.type) {
     case ActionCreators.PlaylistFetchSuccess.type:
       return {
-        ...state, songs: action.payload.playlist.songs
+        ...state, songs: action.payload.playlist.map((song, id) => ({ ...song, id }))
       };
     default: return state;
   }
