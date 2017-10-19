@@ -50,7 +50,7 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
   }
   
   private redirectToSpotifyLoginWindow() {
-    const url = this.getLoginURL(['user-read-email', 'playlist-read-collaborative', 'playlist-read-private']);
+    const url = this.getLoginURL(config.spotifyScope);
     window.location.href = url;
   }
 
