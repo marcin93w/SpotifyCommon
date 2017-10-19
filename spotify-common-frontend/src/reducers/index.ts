@@ -10,6 +10,7 @@ const initialPlaylistState = {
 const initialUserState = {
   isSpotifyAuthStarted: false,
   apiToken: '',
+  playlistId: '',
   loginErrorMessage: ''
 };
 
@@ -21,7 +22,7 @@ function user(state: User = initialUserState, action: Action) {
       };
     case ActionCreators.SpotifyAuthSuccess.type:
       return {
-        ...state, apiToken: action.payload.apiToken
+        ...state, apiToken: action.payload.apiToken, playlistId: action.payload.playlistId
       }
     case ActionCreators.SpotifyAuthError.type: {
       return {
