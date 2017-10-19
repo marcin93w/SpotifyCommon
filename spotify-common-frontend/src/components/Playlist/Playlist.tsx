@@ -22,6 +22,7 @@ class Playlist extends React.Component<PlaylistProperties, {}> {
 
     return (
       <div className="Playlist">
+        <p>Currently playing queue:</p>
         {songIds.map(songId => 
           <Song key={songId} id={songId} />
         )}

@@ -1,4 +1,4 @@
-type Song = Readonly<{
+export type Song = Readonly<{
   id: number;
   name: String;
   artist: String;
@@ -16,7 +16,15 @@ export type User = Readonly<{
   loginErrorMessage: string;
 }>;
 
+export type SearchData = Readonly<{
+  query: string,
+  isRunning: boolean,
+  error: string,
+  results: Song[]
+}>;
+
 export type State = Readonly<{
   user: User,
-  playlist: Playlist
+  playlist: Playlist,
+  search: SearchData
 }>;

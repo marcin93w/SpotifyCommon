@@ -19,6 +19,12 @@ let initialState: State = {
   },
   playlist: {
     songs: []
+  },
+  search: {
+    query: "", 
+    isRunning: false,
+    error: "",
+    results: []
   }
 };
 
