@@ -17,21 +17,14 @@ export const ActionCreators = {
 export function fetchPlaylist() {
   return (dispatch: Dispatch<State>, getState: () => State) => {
     dispatch(ActionCreators.PlaylistFetchStarted.create({}));
-    fetch(`${config.apiUrl}playlist`, {
-      method: "POST",
-      body: JSON.stringify({code: getState().user.apiToken}),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-    })
+    fetch(`${config.apiUrl}playlist/tracks/${getState().user.playlistId}/${getState().user.apiToken}`)
     .then(res => res.json())
     .then(data => {
       dispatch(ActionCreators.PlaylistFetchSuccess.create({playlist: data}));
     })
     .catch((error: Error) => {
       dispatch(ActionCreators.PlaylistFetchError.create({
-        errorMessage: error.message ? error.message : "Authorization error"
+        errorMessage: error.message ? error.message : "Error"
       }));
     });
   }

@@ -3,16 +3,16 @@ import * as React from 'react';
 type SongProperties = Readonly<{
   id: number;
   name: String;
-  author: String;
+  artist: String;
   album: String;
 }>;
 
 class Song extends React.Component<SongProperties, {}> {
   render() {
-    const {name, author, album} = this.props;
+    const {name, artist, album} = this.props;
     return (
       <div className="Song">
-        {name};{author};{album}
+        {name};{artist};{album}
       </div>
     );
   }

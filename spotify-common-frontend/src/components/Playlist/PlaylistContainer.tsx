@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import PlaylistComponent from './Playlist';
 import { State } from '../../types/State';
 import { Dispatch } from 'react-redux';
-
-import ActionCreators from '../../actions';
+import { fetchPlaylist } from '../../actions/playlist';
 
 const mapStateToProps = ({user, playlist}: State) => {
   return { 
@@ -13,20 +12,7 @@ const mapStateToProps = ({user, playlist}: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
-  dispatch(ActionCreators.PlaylistFetchSuccess.create({playlist: {
-    songs: [{
-      id: 1,
-      name: 'ads',
-      author: 'das',
-      album: 'gdfg'
-    }, {
-      id: 2,
-      name: 'ds',
-      author: 'cvx',
-      album: 'nty'
-    }]
-  }}));
-  return {};
+  return { fetchPlaylist: () => dispatch(fetchPlaylist()) };
 };
 
 const Playlist = connect(
