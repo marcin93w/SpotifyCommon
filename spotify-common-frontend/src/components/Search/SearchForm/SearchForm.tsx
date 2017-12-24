@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormControl, Button, InputGroup } from 'react-bootstrap';
 
 interface SearchFormOwnProps {
   query: string;
@@ -16,9 +17,10 @@ class SearchForm extends React.Component<SearchFormProperties, SearchFormOwnProp
       };
   }
 
-  updateInputValue(evt: React.ChangeEvent<HTMLInputElement>) {
+  updateInputValue(evt: React.FormEvent<FormControl>) {
     this.setState({
-      query: evt.target.value
+      // tslint:disable-next-line:no-any
+      query: (evt.currentTarget as any).value
     });
   }
 
@@ -31,13 +33,17 @@ class SearchForm extends React.Component<SearchFormProperties, SearchFormOwnProp
 
     return (
       <div id="search-form">
-        <input 
-          type="text" 
-          placeholder="Search for songs..." 
-          value={query} 
-          onChange={evt => this.updateInputValue(evt)} 
-        />
-        <button onClick={search}>Search</button>
+        <InputGroup>
+          <FormControl 
+            type="text" 
+            placeholder="Search for songs..." 
+            value={query} 
+            onChange={evt => this.updateInputValue(evt)} 
+          />
+          <span className="input-group-btn">
+            <Button onClick={search}><span className="glyphicon glyphicon-search" /></Button>
+          </span>
+        </InputGroup>
       </div>
     );
   }

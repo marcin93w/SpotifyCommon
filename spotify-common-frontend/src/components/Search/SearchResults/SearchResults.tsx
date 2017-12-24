@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Song } from '../../../types/State';
+import { Table, Button } from 'react-bootstrap';
 
 interface SearchResultsProperties {
   songs: Song[];
@@ -12,12 +13,18 @@ class SearchResults extends React.Component<SearchResultsProperties, {}> {
 
     return (
       <div className="SearchResults">
-        {songs.map(song => 
-          <div className="result-song">
-            {song.name};{song.album};{song.artist}
-            <button onClick={addSong.bind(this, song.spotifyId)}>Add to queue</button>
-          </div>
-        )}
+        <Table striped={true} bordered={true} condensed={true} hover={true}>
+          <tbody>
+            {songs.map(song => 
+              <tr>
+                <td><strong>{song.name}</strong> - {song.album} - <i>{song.artist}</i></td>
+                <td><Button onClick={addSong.bind(this, song.spotifyId)}>
+                  <span className="	glyphicon glyphicon-plus text-success" />
+                </Button></td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
       </div>
     );
   }

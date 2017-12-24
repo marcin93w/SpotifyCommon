@@ -26,9 +26,11 @@ class Playlist extends React.Component<PlaylistProperties, {}> {
       <div className="Playlist">
         <Panel header="Currently playing queue:">
           <Table>
-            {songIds.map(songId => 
-              <Song key={songId} id={songId} />
-            )}
+            <tbody>
+              {songIds.map(songId => 
+                <Song key={songId} id={songId} />
+              )}
+            </tbody>
           </Table>
         </Panel>
       </div>

@@ -1,0 +1,7 @@
+.SearchPanel {
+    padding: 0 10px;
+}
+
+.SearchResults table td {
+    border: none;
+}
