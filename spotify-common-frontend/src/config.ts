@@ -10,5 +10,5 @@ export default {
     'playlist-modify-public',
   ],
 
-  apiUrl: 'http://192.168.0.15:8080/'
+  apiUrl: 'http://localhost:8080/'
 };

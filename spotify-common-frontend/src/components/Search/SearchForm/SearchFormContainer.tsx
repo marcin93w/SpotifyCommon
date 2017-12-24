@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import SearchFormComponent from './SearchForm';
 import { State } from '../../../types/State';
 import { Dispatch } from 'react-redux';
-import {search} from '../../../actions/search';
+import { search } from '../../../actions/search';
 
 const mapStateToProps = ({}: State) => {
   return {};

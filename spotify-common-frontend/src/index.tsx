@@ -8,27 +8,27 @@ import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import { compose } from 'redux';
-import { State } from "./types/State";
+import { State } from './types/State';
 
 let initialState: State = {
   user: {
     isSpotifyAuthStarted: false,
-    apiToken: (localStorage.getItem("userId") as string) || "",
-    playlistId: (localStorage.getItem("playlistId") as string) || "",
-    loginErrorMessage: ""
+    apiToken: (localStorage.getItem('userId') as string) || '',
+    playlistId: (localStorage.getItem('playlistId') as string) || '',
+    loginErrorMessage: ''
   },
   playlist: {
     songs: []
   },
   search: {
-    query: "", 
+    query: '', 
     isRunning: false,
-    error: "",
+    error: '',
     results: []
   },
   songAddData: {
     isRunning: false,
-    error: "",
+    error: '',
     position: 0
   }
 };
@@ -38,10 +38,10 @@ const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compo
 const middleware = composeEnhancers(applyMiddleware(thunkMiddleware));
 const store = createStore<State>(reducers, initialState, middleware);
 
-store.subscribe(()=>{
+store.subscribe(() => {
   localStorage.setItem('userId', store.getState().user.apiToken);
   localStorage.setItem('playlistId', store.getState().user.playlistId);
-})
+});
 
 ReactDOM.render(
   <Provider store={store}>

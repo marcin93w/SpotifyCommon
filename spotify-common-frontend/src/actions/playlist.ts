@@ -1,7 +1,7 @@
 import Song from '../types/DTO/Song';
 import { ActionCreator } from 'react-redux-typescript';
-import { Dispatch } from "react-redux";
-import { State } from "../types/State";
+import { Dispatch } from 'react-redux';
+import { State } from '../types/State';
 import config from '../config';
 
 const PLAYLIST_FETCH_SUCCESS = 'PLAYLIST_FETCH_SUCCESS';
@@ -24,8 +24,8 @@ export function fetchPlaylist() {
     })
     .catch((error: Error) => {
       dispatch(ActionCreators.PlaylistFetchError.create({
-        errorMessage: error.message ? error.message : "Error"
+        errorMessage: error.message ? error.message : 'Error'
       }));
     });
-  }
+  };
 }

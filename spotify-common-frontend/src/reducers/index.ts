@@ -15,17 +15,17 @@ const initialUserState = {
 };
 
 const initialSearchState = {
-  query: "", 
+  query: '', 
   isRunning: false,
-  error: "",
+  error: '',
   results: []
 };
 
 const initialSongAddState = {
   isRunning: false,
-  error: "",
+  error: '',
   position: 0
-}
+};
 
 function user(state: User = initialUserState, action: Action) {
   switch (action.type) {
@@ -36,11 +36,11 @@ function user(state: User = initialUserState, action: Action) {
     case ActionCreators.SpotifyAuthSuccess.type:
       return {
         ...state, apiToken: action.payload.apiToken, playlistId: action.payload.playlistId
-      }
+      };
     case ActionCreators.SpotifyAuthError.type: {
       return {
         ...state, loginErrorMessage: action.payload.errorMessage
-      }
+      };
     }
     default: return state;
   }
@@ -60,7 +60,9 @@ function search(state: SearchData = initialSearchState, action: Action) {
   switch (action.type) {
     case ActionCreators.SearchFetchSuccess.type:
       return {
-        ...state, isRunning: false, results: action.payload.results.map((song, id) => ({...song, id, spotifyId: song.id}))
+        ...state, 
+        isRunning: false, 
+        results: action.payload.results.map((song, id) => ({...song, id, spotifyId: song.id}))
       };
     case ActionCreators.SearchFetchStarted.type:
       return {

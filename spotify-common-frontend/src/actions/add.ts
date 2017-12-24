@@ -1,23 +1,23 @@
 import { ActionCreator } from 'react-redux-typescript';
-import { Dispatch } from "react-redux";
-import { State } from "../types/State";
+import { Dispatch } from 'react-redux';
+import { State } from '../types/State';
 import config from '../config';
 
-const Add_FETCH_SUCCESS = 'Add_FETCH_SUCCESS';
-const Add_FETCH_ERROR = 'Add_FETCH_ERROR';
-const Add_FETCH_STARTED = 'Add_FETCH_STARTED';
+const ADD_FETCH_SUCCESS = 'Add_FETCH_SUCCESS';
+const ADD_FETCH_ERROR = 'Add_FETCH_ERROR';
+const ADD_FETCH_STARTED = 'Add_FETCH_STARTED';
 
 export const ActionCreators = {
-  AddFetchSuccess: new ActionCreator<typeof Add_FETCH_SUCCESS, {position: number}>(Add_FETCH_SUCCESS),
-  AddFetchError: new ActionCreator<typeof Add_FETCH_ERROR, {errorMessage: string}>(Add_FETCH_ERROR),
-  AddFetchStarted: new ActionCreator<typeof Add_FETCH_STARTED, {}>(Add_FETCH_STARTED)
+  AddFetchSuccess: new ActionCreator<typeof ADD_FETCH_SUCCESS, {position: number}>(ADD_FETCH_SUCCESS),
+  AddFetchError: new ActionCreator<typeof ADD_FETCH_ERROR, {errorMessage: string}>(ADD_FETCH_ERROR),
+  AddFetchStarted: new ActionCreator<typeof ADD_FETCH_STARTED, {}>(ADD_FETCH_STARTED)
 };
 
 export function addSong(songId: string) {
   return (dispatch: Dispatch<State>, getState: () => State) => {
     dispatch(ActionCreators.AddFetchStarted.create({}));
     fetch(`${config.apiUrl}playlist/tracks/${getState().user.playlistId}/${getState().user.apiToken}`, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({trackId: songId}),
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -30,8 +30,8 @@ export function addSong(songId: string) {
     })
     .catch((error: Error) => {
       dispatch(ActionCreators.AddFetchError.create({
-        errorMessage: error.message ? error.message : "Error"
+        errorMessage: error.message ? error.message : 'Error'
       }));
     });
-  }
+  };
 }

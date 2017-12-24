@@ -5,15 +5,15 @@ interface SearchFormOwnProps {
 }
 
 interface SearchFormProperties {
-  search: (query: string) => void
+  search: (query: string) => void;
 }
 
 class SearchForm extends React.Component<SearchFormProperties, SearchFormOwnProps> {
   constructor(props: SearchFormProperties) {
-      super(props)
+      super(props);
       this.state = {
-        query: ""
-      }
+        query: ''
+      };
   }
 
   updateInputValue(evt: React.ChangeEvent<HTMLInputElement>) {
@@ -27,13 +27,16 @@ class SearchForm extends React.Component<SearchFormProperties, SearchFormOwnProp
 
     const search = () => {
       this.props.search(query);
-    }
+    };
 
     return (
       <div id="search-form">
-        <input type="text" placeholder="Search for songs..." 
+        <input 
+          type="text" 
+          placeholder="Search for songs..." 
           value={query} 
-          onChange={evt => this.updateInputValue(evt)} />
+          onChange={evt => this.updateInputValue(evt)} 
+        />
         <button onClick={search}>Search</button>
       </div>
     );
