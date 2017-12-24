@@ -34,5 +34,5 @@ export type State = Readonly<{
   user: User,
   playlist: Playlist,
   search: SearchData,
-  songAddData: SongAddData
+  songAdd: SongAddData
 }>;

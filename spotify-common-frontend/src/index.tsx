@@ -26,7 +26,7 @@ let initialState: State = {
     error: '',
     results: []
   },
-  songAddData: {
+  songAdd: {
     isRunning: false,
     error: '',
     position: 0

@@ -3,9 +3,9 @@ import { Dispatch } from 'react-redux';
 import { State } from '../types/State';
 import config from '../config';
 
-const ADD_FETCH_SUCCESS = 'Add_FETCH_SUCCESS';
-const ADD_FETCH_ERROR = 'Add_FETCH_ERROR';
-const ADD_FETCH_STARTED = 'Add_FETCH_STARTED';
+const ADD_FETCH_SUCCESS = 'ADD_FETCH_SUCCESS';
+const ADD_FETCH_ERROR = 'ADD_FETCH_ERROR';
+const ADD_FETCH_STARTED = 'ADD_FETCH_STARTED';
 
 export const ActionCreators = {
   AddFetchSuccess: new ActionCreator<typeof ADD_FETCH_SUCCESS, {position: number}>(ADD_FETCH_SUCCESS),
@@ -24,7 +24,6 @@ export function addSong(songId: string) {
           'Content-Type': 'application/json'
         }
     })
-    .then(res => res.json())
     .then(data => {
       dispatch(ActionCreators.AddFetchSuccess.create({position: 1}));
     })

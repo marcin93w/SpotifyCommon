@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Playlist from '../Playlist/PlaylistContainer';
 import SharingInfoPanel from '../SharingInfoPanel/SharingInfoPanelContainer';
-import SearchPanel from '../Search/SearchPanel';
+import SearchPanel from '../Search/SearchPanelContainer';
 import './MainPage.css';
 
 const MainPage = () => ( 

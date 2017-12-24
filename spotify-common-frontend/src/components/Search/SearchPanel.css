@@ -1,7 +1,20 @@
 .SearchPanel {
     padding: 0 10px;
+    position: relative;
+}
+
+.SearchPanel .loading {
+    opacity: .3;
+    pointer-events: none;
 }
 
 .SearchResults table td {
     border: none;
+}
+
+.LoadingPanel {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    z-index: 2;
 }
