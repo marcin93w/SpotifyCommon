@@ -1,6 +1,8 @@
 import * as React from 'react';
 import config from '../../config';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import './LoginPanel.css';
 
 interface LoginPageProps {
   startAuthentication: (spotifyAuthCode: string) => void;
@@ -34,9 +36,9 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
         {isError &&
             <div className="error-message">{errorMessage}</div>
         }
-        <button className="btn" onClick={onLoginButtonClick} disabled={isSpotifyAuthStarted}>
+        <Button className="btn-success" onClick={onLoginButtonClick} disabled={isSpotifyAuthStarted}>
           Login with Spotify
-        </button>
+        </Button>
       </div>
     );
   }
