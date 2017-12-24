@@ -12,9 +12,9 @@ class Song extends React.Component<SongProperties, {}> {
   render() {
     const {name, artist, album} = this.props;
     return (
-      <div className="Song">
-        {name};{artist};{album}
-      </div>
+      <tr className="Song">
+        <td><strong>{name}</strong> - {artist} - <i>{album}</i></td>
+      </tr>
     );
   }
 }

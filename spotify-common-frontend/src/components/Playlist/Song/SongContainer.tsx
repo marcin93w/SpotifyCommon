@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SongComponent from './Song';
-import { State } from '../../types/State';
+import { State } from '../../../types/State';
 import { Dispatch } from 'react-redux';
 
 interface OwnProps {

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import Song from '../Song/SongContainer';
+import Song from '../Playlist/Song/SongContainer';
 import { Redirect } from 'react-router-dom';
-import { Panel } from 'react-bootstrap';
+import { Panel, Table } from 'react-bootstrap';
+import './Playlist.css';
 
 interface PlaylistProperties {
   fetchPlaylist: () => void;
@@ -24,9 +25,11 @@ class Playlist extends React.Component<PlaylistProperties, {}> {
     return (
       <div className="Playlist">
         <Panel header="Currently playing queue:">
-          {songIds.map(songId => 
-            <Song key={songId} id={songId} />
-          )}
+          <Table>
+            {songIds.map(songId => 
+              <Song key={songId} id={songId} />
+            )}
+          </Table>
         </Panel>
       </div>
     );
