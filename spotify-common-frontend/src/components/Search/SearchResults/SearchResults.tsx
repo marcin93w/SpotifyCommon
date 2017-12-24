@@ -12,7 +12,6 @@ class SearchResults extends React.Component<SearchResultsProperties, {}> {
 
     return (
       <div className="SearchResults">
-        <p>Results:</p>
         {songs.map(song => 
           <div className="result-song">
             {song.name};{song.album};{song.artist}

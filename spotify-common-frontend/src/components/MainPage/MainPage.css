@@ -1,0 +1,19 @@
+#AppWrapper {
+    display: grid;
+    margin: 10px 30px;
+}
+
+.SharingInfoPanel {
+    grid-column: 1 / 6;
+    grid-row: 1;
+}
+
+.Playlist {
+    grid-column: 4 / 6;
+    grid-row: 2;
+}
+
+.SearchPanel {
+    grid-column: 1 / 4;
+    grid-row: 2;
+}
