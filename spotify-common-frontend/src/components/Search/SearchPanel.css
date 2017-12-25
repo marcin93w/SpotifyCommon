@@ -8,7 +8,7 @@
     pointer-events: none;
 }
 
-.SearchResults table td {
+.SearchResults table > tbody > tr > td {
     border: none;
 }
 
