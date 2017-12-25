@@ -4,7 +4,7 @@ import { Table, Button } from 'react-bootstrap';
 
 interface SearchResultsProperties {
   songs: Song[];
-  addSong: (songId: string) => void;
+  addSong: (song: Song) => void;
 }
 
 class SearchResults extends React.Component<SearchResultsProperties, {}> {
@@ -18,7 +18,7 @@ class SearchResults extends React.Component<SearchResultsProperties, {}> {
             {songs.map(song => 
               <tr>
                 <td><strong>{song.name}</strong> - {song.album} - <i>{song.artist}</i></td>
-                <td><Button onClick={addSong.bind(this, song.spotifyId)}>
+                <td><Button onClick={addSong.bind(this, song)}>
                   <span className="	glyphicon glyphicon-plus text-success" />
                 </Button></td>
               </tr>

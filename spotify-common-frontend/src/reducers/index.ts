@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import ActionCreators from '../actions';
 import Action from '../types/Action';
-import { Playlist, User, State, SearchData, SongAddData } from '../types/State';
+import { Playlist, User, State, SearchData, SongAddData, Song } from '../types/State';
 
 const initialPlaylistState = {
   songs: []
@@ -51,6 +51,11 @@ function playlist(state: Playlist = initialPlaylistState, action: Action) {
     case ActionCreators.PlaylistFetchSuccess.type:
       return {
         ...state, songs: action.payload.playlist.map((song, id) => ({ ...song, id }))
+      };
+    case ActionCreators.AddFetchSuccess.type:
+      const newSong: Song = { ...action.payload.song, id: state.songs.length };
+      return {
+        ...state, songs: state.songs.concat([newSong])
       };
     default: return state;
   }
