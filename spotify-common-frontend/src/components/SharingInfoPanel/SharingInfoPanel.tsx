@@ -8,9 +8,12 @@ type SharingInfoPanelProperties = Readonly<{
 class SharingInfoPanel extends React.Component<SharingInfoPanelProperties, {}> {
   render() {
     const {playlistId} = this.props;
+    const inviteLink = 'http://localhost:3000?invite=' + playlistId;
     return (
       <div className="SharingInfoPanel">
-        <Well>Share this link with firends: {playlistId}</Well>
+        <Well>Share this link with firends: 
+          <a href={inviteLink}>{inviteLink}</a>
+        </Well>
       </div>
     );
   }

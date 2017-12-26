@@ -11,7 +11,7 @@ export type Playlist = Readonly<{
 }>;
 
 export type User = Readonly<{
-  isSpotifyAuthStarted: boolean;
+  isAuthStarted: boolean;
   apiToken: string;
   playlistId: string;
   loginErrorMessage: string;

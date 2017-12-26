@@ -12,7 +12,7 @@ import { State } from './types/State';
 
 let initialState: State = {
   user: {
-    isSpotifyAuthStarted: false,
+    isAuthStarted: false,
     apiToken: (localStorage.getItem('userId') as string) || '',
     playlistId: (localStorage.getItem('playlistId') as string) || '',
     loginErrorMessage: ''

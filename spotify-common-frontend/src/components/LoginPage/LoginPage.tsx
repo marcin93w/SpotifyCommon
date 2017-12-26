@@ -5,7 +5,8 @@ import { Button } from 'react-bootstrap';
 import './LoginPanel.css';
 
 interface LoginPageProps {
-  startAuthentication: (spotifyAuthCode: string) => void;
+  startSpotifyAuthentication: (spotifyAuthCode: string) => void;
+  startGuestAuthentication: (guestInviteCode: string) => void;
   isSpotifyAuthStarted: boolean;
   errorMessage: string;
   isError: boolean;
@@ -15,8 +16,10 @@ interface LoginPageProps {
 class LoginPage extends React.Component<LoginPageProps, {}> {
   componentDidMount() {
     const token = this.tryGetAccessToken();
-    if (token) {
-      this.props.startAuthentication(token);
+    if (token.spotifyCode) {
+      this.props.startSpotifyAuthentication(token.spotifyCode);
+    } else if (token.guestInviteCode) {
+      this.props.startGuestAuthentication(token.guestInviteCode);
     }
   }
 
@@ -56,8 +59,8 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
     window.location.href = url;
   }
 
-  private tryGetAccessToken(): string {
-    let hash: {code: string} = {code: ''};
+  private tryGetAccessToken(): {spotifyCode: string, guestInviteCode: string} {
+    let hash: {code: string, invite: string} = {code: '', invite: ''};
 
     window.location.search.replace('?', '').split('&').forEach(function(kv: string) {
       var spl = kv.indexOf('=');
@@ -66,7 +69,10 @@ class LoginPage extends React.Component<LoginPageProps, {}> {
       }
     });
 
-    return hash.code;
+    return {
+      spotifyCode: hash.code,
+      guestInviteCode: hash.invite
+    };
   }
 }
 

@@ -8,7 +8,7 @@ const initialPlaylistState = {
 };
 
 const initialUserState = {
-  isSpotifyAuthStarted: false,
+  isAuthStarted: false,
   apiToken: '',
   playlistId: '',
   loginErrorMessage: ''
@@ -30,18 +30,20 @@ const initialSongAddState = {
 function user(state: User = initialUserState, action: Action) {
   switch (action.type) {
     case ActionCreators.SpotifyAuthStarted.type:
+    case ActionCreators.GuestAuthStarted.type:
       return {
-        ...state, isSpotifyAuthStarted: true
+        ...state, isAuthStarted: true
       };
     case ActionCreators.SpotifyAuthSuccess.type:
+    case ActionCreators.GuestAuthSuccess.type:
       return {
         ...state, apiToken: action.payload.apiToken, playlistId: action.payload.playlistId
       };
-    case ActionCreators.SpotifyAuthError.type: {
+    case ActionCreators.SpotifyAuthError.type:
+    case ActionCreators.GuestAuthError.type:
       return {
         ...state, loginErrorMessage: action.payload.errorMessage
       };
-    }
     default: return state;
   }
 }
